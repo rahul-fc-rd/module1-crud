@@ -1,4 +1,4 @@
-package com.fc.rd.module1_crud;
+package com.fc.rd.module1.crud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
