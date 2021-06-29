@@ -1,25 +1,39 @@
 package com.fc.rd.module1.rud.pojo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class User {
 
-
 //	private long id;
-
+	@JsonProperty("name")
 	private String name;
 
+	@JsonProperty("password")
 	private String password;
 
+	@JsonProperty("firstName")
 	private String firstName;
+
+	@JsonProperty("middleName")
 	private String middleName;
+
+	@JsonProperty("lastName")
 	private String lastName;
 
+	@JsonProperty("telephone")
 	private String telephone;
+
+	@JsonProperty("telephoneExtension")
 	private String telephoneExtension;
+
+	@JsonProperty("mobile")
 	private String mobile;
+
+	@JsonProperty("email")
 	private String email;
 
-	public User (String name, String password, String firstName, String middleName, String lastName,
-			String telephone, String telephoneExtension, String mobile, String email) {
+	public User(String name, String password, String firstName, String middleName, String lastName, String telephone,
+			String telephoneExtension, String mobile, String email) {
 		super();
 //		this.id = id;
 		this.name = name;
@@ -116,9 +130,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [ name=" + name + ", password=" + password + ", firstName=" + firstName
-				+ ", middleName=" + middleName + ", lastName=" + lastName + ", telephone=" + telephone
-				+ ", telephoneExtension=" + telephoneExtension + ", mobile=" + mobile + ", email=" + email + "]";
+		return "User [ name=" + name + ", password=" + password + ", firstName=" + firstName + ", middleName="
+				+ middleName + ", lastName=" + lastName + ", telephone=" + telephone + ", telephoneExtension="
+				+ telephoneExtension + ", mobile=" + mobile + ", email=" + email + "]";
 	}
 
 }

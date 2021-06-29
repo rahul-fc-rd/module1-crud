@@ -1,21 +1,22 @@
 package com.fc.rd.module1.crud.serviceInt;
 
-import org.springframework.http.ResponseEntity;
+import java.util.List;
+import java.util.Optional;
 
-import com.fc.rd.module1.crud.util.ResponseBean;
+import com.fc.rd.module1.crud.entity.UserEntity;
 import com.fc.rd.module1.rud.pojo.User;
 
 
 public interface UserServiceInt {
 
-	ResponseEntity<ResponseBean> save(User user);
+	public UserEntity save(User user);
 
-	ResponseEntity<ResponseBean> getAll();
+	public List<UserEntity> getAll();
 	
-	ResponseEntity<ResponseBean> findById(long id);
+	public Optional<UserEntity> findById(long id);
 	
-	ResponseEntity<ResponseBean> update(long id,User user);
+    public UserEntity update(long id,User user);
 	
-	ResponseEntity<ResponseBean> delete(long id);
+	public Optional<UserEntity> delete(long id);
 	
 }
