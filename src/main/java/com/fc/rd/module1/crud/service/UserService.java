@@ -27,9 +27,9 @@ public class UserService  implements UserServiceInt{
 		UserEntity userEntity = new UserEntity();
 		BeanUtils.copyProperties(user,userEntity);
 		
-		userRepoInt.save(userEntity);
+		UserEntity savedUser = userRepoInt.save(userEntity);
 		
-		return new ResponseEntity<>(new ResponseBean(200,"Success",user),HttpStatus.CREATED);
+		return new ResponseEntity<>(new ResponseBean(201,"Success",savedUser),HttpStatus.CREATED);
 	}
 
 	

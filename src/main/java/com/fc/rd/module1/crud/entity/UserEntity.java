@@ -11,7 +11,7 @@ import javax.persistence.Table;
 public class UserEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue /* (strategy = GenerationType.AUTO) */
 	private long id;
 
 	private String name;
@@ -104,6 +104,5 @@ public class UserEntity {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
+		
 }
