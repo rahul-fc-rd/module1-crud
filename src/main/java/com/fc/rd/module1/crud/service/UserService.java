@@ -1,13 +1,9 @@
 package com.fc.rd.module1.crud.service;
 
-import java.net.URI;
-
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.fc.rd.module1.crud.entity.UserEntity;
 import com.fc.rd.module1.crud.repoInt.UserRepoInt;
@@ -24,8 +20,9 @@ public class UserService  implements UserServiceInt{
 	@Override
 	public ResponseEntity<ResponseBean> save(User user) {
 		
-		UserEntity userEntity = new UserEntity();
-		BeanUtils.copyProperties(user,userEntity);
+//		UserEntity userEntity = new UserEntity();
+//		BeanUtils.copyProperties(user,userEntity);
+		UserEntity userEntity=PojoToEntityMapperUtil.toEntity(user);
 		
 		UserEntity savedUser = userRepoInt.save(userEntity);
 		

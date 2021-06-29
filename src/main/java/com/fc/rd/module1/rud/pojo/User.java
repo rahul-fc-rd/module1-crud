@@ -3,7 +3,7 @@ package com.fc.rd.module1.rud.pojo;
 public class User {
 
 
-	private long id;
+//	private long id;
 
 	private String name;
 
@@ -18,10 +18,10 @@ public class User {
 	private String mobile;
 	private String email;
 
-	public User(long id, String name, String password, String firstName, String middleName, String lastName,
+	public User (String name, String password, String firstName, String middleName, String lastName,
 			String telephone, String telephoneExtension, String mobile, String email) {
 		super();
-		this.id = id;
+//		this.id = id;
 		this.name = name;
 		this.password = password;
 		this.firstName = firstName;
@@ -36,13 +36,11 @@ public class User {
 	public User() {
 	}
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
+	/*
+	 * public long getId() { return id; }
+	 * 
+	 * public void setId(long id) { this.id = id; }
+	 */
 
 	public String getName() {
 		return name;
@@ -118,7 +116,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", password=" + password + ", firstName=" + firstName
+		return "User [ name=" + name + ", password=" + password + ", firstName=" + firstName
 				+ ", middleName=" + middleName + ", lastName=" + lastName + ", telephone=" + telephone
 				+ ", telephoneExtension=" + telephoneExtension + ", mobile=" + mobile + ", email=" + email + "]";
 	}
