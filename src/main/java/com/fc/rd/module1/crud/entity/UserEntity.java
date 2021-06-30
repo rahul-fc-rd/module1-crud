@@ -12,15 +12,11 @@ public class UserEntity {
 	@Id
 	@GeneratedValue /* (strategy = GenerationType.AUTO) */
 	private long id;
-
 	private String name;
-
 	private String password;
-
 	private String firstName;
 	private String middleName;
 	private String lastName;
-
 	private String telephone;
 	private String telephoneExtension;
 	private String mobile;

@@ -2,7 +2,7 @@ package com.fc.rd.module1.crud.util;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ResponseBean {
+public class ResponseBean<T> {
 	@JsonProperty("status")
 	private int status;
 
@@ -13,16 +13,16 @@ public class ResponseBean {
 	private String errorMessage;
 
 	@JsonProperty("result")
-	private Object result;
+	private T result;
 
-	public ResponseBean(int status, String message, Object result) {
+	public ResponseBean(int status, String message, T result) {
 		super();
 		this.status = status;
 		this.message = message;
 		this.result = result;
 	}
 
-	public ResponseBean(int status, String message, String errorMessage, Object result) {
+	public ResponseBean(int status, String message, String errorMessage, T result) {
 		super();
 		this.status = status;
 		this.message = message;
@@ -47,11 +47,11 @@ public class ResponseBean {
 		this.message = message;
 	}
 
-	public Object getResult() {
+	public T getResult() {
 		return result;
 	}
 
-	public void setResult(Object result) {
+	public void setResult(T result) {
 		this.result = result;
 	}
 

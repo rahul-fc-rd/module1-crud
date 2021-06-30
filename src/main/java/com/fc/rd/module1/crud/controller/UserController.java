@@ -16,70 +16,82 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fc.rd.module1.crud.config.Constant;
 import com.fc.rd.module1.crud.entity.UserEntity;
+import com.fc.rd.module1.crud.pojo.User;
 import com.fc.rd.module1.crud.service.UserService;
-import com.fc.rd.module1.crud.util.MscException;
+import com.fc.rd.module1.crud.util.GenericErrorCode;
 import com.fc.rd.module1.crud.util.ResponseBean;
-import com.fc.rd.module1.rud.pojo.User;
 
 @RestController
-@RequestMapping(value = "/fc")
+@RequestMapping(value = "/users")
 public class UserController {
 
 	@Autowired
 	UserService userService;
 
-	@PostMapping(path = "/users", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseBean> createUser(@RequestBody User user) {
+	@PostMapping(path = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseBean<UserEntity>> createUser(@RequestBody User user) {
 
 		UserEntity savedUserEntity = userService.save(user);
-		return new ResponseEntity<>(new ResponseBean(201, "Success", savedUserEntity), HttpStatus.CREATED);
+		return new ResponseEntity<>(new ResponseBean<UserEntity>(GenericErrorCode.CREATED.getCode(),
+				GenericErrorCode.CREATED.getDefaultMessage(), savedUserEntity), HttpStatus.CREATED);
 
 	}
 
-	@GetMapping(path = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseBean> getAll() {
-		try {
+	@GetMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseBean<List<UserEntity>>> getAll() {
+	
 			List<UserEntity> list = (List<UserEntity>) userService.getAll();
-			;
-			return new ResponseEntity<>(new ResponseBean(200, "Success", list), HttpStatus.OK);
-		} catch (Exception ex) {
-			return new ResponseEntity<>(new ResponseBean(500, "fail", ex.getMessage(), null),
-					HttpStatus.EXPECTATION_FAILED);
+			return new ResponseEntity<ResponseBean<List<UserEntity>>>(
+					new ResponseBean<List<UserEntity>>(GenericErrorCode.SUCCESS.getCode(),
+							GenericErrorCode.SUCCESS.getDefaultMessage(), list),
+					HttpStatus.OK);
 		}
-	}
 
 	@GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseBean> findById(@PathVariable(value = "id") long id) {
+	public ResponseEntity<ResponseBean<UserEntity>> findById(@PathVariable(value = "id") long id) {
 		Optional<UserEntity> userEntity = userService.findById(id);
-		Object obj = new Object();
+		UserEntity obj = new UserEntity();
 		if (userEntity.isPresent()) {
 			obj = userEntity.get();
-			return new ResponseEntity<>(new ResponseBean(200, "Success", obj), HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseBean<UserEntity>(GenericErrorCode.SUCCESS.getCode(),
+					GenericErrorCode.SUCCESS.getDefaultMessage(), obj), HttpStatus.OK);
 		} else {
-			throw new MscException("No Record found by this id :", id);
+			return new ResponseEntity<>(new ResponseBean<UserEntity>(GenericErrorCode.ERR_01.getCode(),
+					GenericErrorCode.ERR_01.getDefaultMessage(), Constant.NO_RECORD_FOUND_BY_THIS_ID + id, null),
+					HttpStatus.BAD_REQUEST);
 		}
 	}
 
-	@PutMapping(path = "/users/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseBean> update(@PathVariable(value = "id") long id, @RequestBody User user) {
+	@PutMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseBean<UserEntity>> update(@PathVariable(value = "id") long id,
+			@RequestBody User user) {
 		UserEntity updatedUser = userService.update(id, user);
 		if (updatedUser != null) {
-			return new ResponseEntity<>(new ResponseBean(200, "Success", updatedUser), HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseBean<UserEntity>(GenericErrorCode.SUCCESS.getCode(),
+					GenericErrorCode.SUCCESS.getDefaultMessage(), updatedUser), HttpStatus.OK);
 		} else {
-			throw new MscException("No Record found by this id :", id);
+//			throw new MscException("No Record found by this id :", id);
+			return new ResponseEntity<>(new ResponseBean<UserEntity>(GenericErrorCode.ERR_01.getCode(),
+					GenericErrorCode.ERR_01.getDefaultMessage(), Constant.NO_RECORD_FOUND_BY_THIS_ID + id, null),
+					HttpStatus.BAD_REQUEST);
 		}
 
 	}
 
-	@DeleteMapping(path = "/users/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseBean> deleteById(@PathVariable(value = "id") long id) {
+	@DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseBean<UserEntity>> deleteById(@PathVariable(value = "id") long id) {
 		Optional<UserEntity> userEntityToBeDeleted = userService.delete(id);
 
 		if (userEntityToBeDeleted != null) {
-			return new ResponseEntity<>(new ResponseBean(200, "Success", userEntityToBeDeleted.get()), HttpStatus.OK);
+			return new ResponseEntity<>(new ResponseBean<UserEntity>(GenericErrorCode.SUCCESS.getCode(),
+					GenericErrorCode.SUCCESS.getDefaultMessage(), userEntityToBeDeleted.get()), HttpStatus.OK);
 		} else {
-			throw new MscException("No Record found by this id :", id);
+//			throw new MscException("No Record found by this id :", id);
+			return new ResponseEntity<>(new ResponseBean<UserEntity>(GenericErrorCode.ERR_01.getCode(),
+					GenericErrorCode.ERR_01.getDefaultMessage(), Constant.NO_RECORD_FOUND_BY_THIS_ID + id, null),
+					HttpStatus.BAD_REQUEST);
 
 		}
 	}

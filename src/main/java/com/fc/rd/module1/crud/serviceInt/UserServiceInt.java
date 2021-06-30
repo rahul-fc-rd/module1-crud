@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.fc.rd.module1.crud.entity.UserEntity;
-import com.fc.rd.module1.rud.pojo.User;
+import com.fc.rd.module1.crud.pojo.User;
 
 
 public interface UserServiceInt {

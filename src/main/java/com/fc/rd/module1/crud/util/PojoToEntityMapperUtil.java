@@ -1,8 +1,7 @@
-package com.fc.rd.module1.crud.service;
+package com.fc.rd.module1.crud.util;
 
 import com.fc.rd.module1.crud.entity.UserEntity;
-import com.fc.rd.module1.rud.pojo.User;
-
+import com.fc.rd.module1.crud.pojo.User;
 
 public class PojoToEntityMapperUtil {
 	
@@ -10,6 +9,8 @@ public class PojoToEntityMapperUtil {
 		
 		if(user.getEmail()!=null)
 		userEntity.setEmail(user.getEmail());
+		if(user.getName()!=null)
+		userEntity.setName(user.getName());
 		if(user.getFirstName()!=null)
 		userEntity.setFirstName(user.getFirstName());
 		if(user.getLastName()!=null)

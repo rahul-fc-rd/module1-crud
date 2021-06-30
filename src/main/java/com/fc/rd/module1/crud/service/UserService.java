@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fc.rd.module1.crud.entity.UserEntity;
+import com.fc.rd.module1.crud.pojo.User;
 import com.fc.rd.module1.crud.repoInt.UserRepoInt;
 import com.fc.rd.module1.crud.serviceInt.UserServiceInt;
-import com.fc.rd.module1.rud.pojo.User;
+import com.fc.rd.module1.crud.util.PojoToEntityMapperUtil;
 
 @Service
 public class UserService  implements UserServiceInt{

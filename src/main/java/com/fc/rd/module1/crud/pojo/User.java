@@ -1,4 +1,4 @@
-package com.fc.rd.module1.rud.pojo;
+package com.fc.rd.module1.crud.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
