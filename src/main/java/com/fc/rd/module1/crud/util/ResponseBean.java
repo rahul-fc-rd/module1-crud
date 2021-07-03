@@ -15,6 +15,11 @@ public class ResponseBean<T> {
 	@JsonProperty("result")
 	private T result;
 
+	
+	public ResponseBean() {
+		super();
+	}
+
 	public ResponseBean(int status, String message, T result) {
 		super();
 		this.status = status;
