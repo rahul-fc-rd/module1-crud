@@ -145,4 +145,40 @@ public class UserControllerUnitTest {
 		assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
 		
 	}
+	
+	@Test
+	void testdeleteByIdPositive() {
+		Map<String, Object> params = new HashMap<>();
+		params.put("id", 1l);
+
+		HttpHeaders header = new HttpHeaders();
+		header.set("content-type", MediaType.APPLICATION_JSON.toString());
+		HttpEntity<User> req = new HttpEntity<>(header);
+		userEntity = new UserEntity();
+		userEntity.setEmail("testdeleteByIdPositive@gmail.com");
+		userEntity.setId(1);
+		when(userService.delete(Mockito.anyLong())).thenReturn(Optional.ofNullable(userEntity));	
+		
+		ResponseEntity<ResponseBean<UserEntity>> response =testRestTemplate.exchange("/users/{id}" ,HttpMethod.DELETE,req, new ParameterizedTypeReference<ResponseBean<UserEntity>>() {},params);
+		
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		
+	}
+	
+	@Test
+	void testdeleteByIdNegativeIfIdNotPresent() {
+		Map<String, Object> params = new HashMap<>();
+		params.put("id", 1l);
+
+		HttpHeaders header = new HttpHeaders();
+		header.set("content-type", MediaType.APPLICATION_JSON.toString());
+		HttpEntity<User> req = new HttpEntity<>(header);
+		
+		when(userService.delete(Mockito.anyLong())).thenReturn(null);	
+		
+		ResponseEntity<ResponseBean<UserEntity>> response =testRestTemplate.exchange("/users/{id}" ,HttpMethod.DELETE,req, new ParameterizedTypeReference<ResponseBean<UserEntity>>() {},params);
+		
+		assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+		
+	}
 }

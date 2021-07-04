@@ -14,12 +14,15 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.TestPropertySource;
 
 import com.fc.rd.module1.crud.entity.UserEntity;
 import com.fc.rd.module1.crud.pojo.User;
 import com.fc.rd.module1.crud.util.ResponseBean;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@TestPropertySource(
+		  locations = "classpath:application-integrationtest.properties")
 public class UserControllerIntegrationTest {
 
 	@Autowired
